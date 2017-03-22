@@ -80,7 +80,7 @@ public class ASDataPickerViewModule extends ReactContextBaseJavaModule implement
                 if (activity == null) {
                     throw new JSApplicationIllegalArgumentException("Tried to open a Picker dialog while not attached to an Activity");
                 }
-
+                optionStr1 = optionStr2 = optionStr3 = "";
                 args = createFragmentArguments(options);
 
                 ReadableArray dataSource = options.getArray("dataSource");
@@ -182,13 +182,18 @@ public class ASDataPickerViewModule extends ReactContextBaseJavaModule implement
         options2Items.clear();
         options1Items.clear();
         options3Items.clear();
-
+        option1 = 0;
+        option2 = 0;
+        option3 = 0;
         for (int i = 0; i < dataSource.size(); i++) {
             try {
                 String type = dataSource.getType(i).name();
 
                 if (type.equals("String")) {
                     String v = dataSource.getString(i);
+                    if (v.equals(optionStr1)) {
+                        option1 = i;
+                    }
                     options1Items.add(new ProvinceBean(i, v, v, v));
                 } else if (type.equals("Map")) {
 
